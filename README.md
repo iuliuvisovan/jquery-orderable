@@ -38,21 +38,21 @@ Add `.js` and `.css` files into your project:
 `$('#myTable').orderable();`
 
 ## Configuration
-Supply a params object:
+ - By supplying a params object:
 
-Example: `$('#myTable').orderable({ flagName: 'flagName' });`
+    Example: `$('#myTable').orderable({ flagName: 'flagName' });`
 
-Available parameters:
+    Available parameters:
 
   - `tbodyAsUnit`: Set to true if you want to move whole row-groups (`<tbody>` elements)
-  
+
       - `false` *(default)* - The order units are the `<tr>` elements inside the target table
       - `true` - The order units are the `<tbody>` elements inside the target table
       
-Add classes to rows:
+ - By adding state classes to rows:
 
-  Available classes:
-  
+     Available classes:
+
   - `.orderable-exclude`: Add this class to a row or row group to exclude it from reordering  
     
 
