@@ -49,7 +49,7 @@ Add `.js` and `.css` files into your project:
       - `false` *(default)* - The order units are the `<tr>` elements inside the target table
       - `true` - The order units are the `<tbody>` elements inside the target table
       
- - By adding state classes to rows:
+ - By adding state classes to markup:
 
      Available classes:
 
