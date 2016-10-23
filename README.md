@@ -58,7 +58,7 @@ Add `.js` and `.css` files into your project:
 
 ## Behaviour
 
-Events are dispatched at key moments of the reordering process. Useful for adding custom behaviour to the process.
+Events are dispatched at key moments of the reordering process. Add handlers to them if you want to add custom behaviour to the plugin.
 
 Example:
 
