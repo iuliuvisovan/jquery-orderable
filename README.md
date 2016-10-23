@@ -1,31 +1,82 @@
-# Project Name
+# jQuery Orderable
 
-TODO: Write a project description
+**jQuery Orderable** is a small jQuery plugin that allows you to reorder rows or row groups inside a table with drag'n'drop. 
+
+## Demo
+
+Soon
 
 ## Installation
 
-TODO: Describe the installation process
+Add `.js` and `.css` files into your project:
 
+- *Via CDN*
+
+``` 
+    <script src="https://cdn.rawgit.com/iuliuvisovan/jquery-orderable/master/jquery.orderable.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.rawgit.com/iuliuvisovan/jquery-orderable/master/jquery.orderable.min.css"></link>    
+```
+
+
+
+
+
+ - *Download & reference locally*
+      - JS:
+         - [jquery-orderable.min.js](https://cdn.rawgit.com/iuliuvisovan/jquery-orderable/master/jquery.orderable.min.js)
+         - [jquery.orderable.js](https://cdn.rawgit.com/iuliuvisovan/jquery-orderable/master/jquery.orderable.js)
+
+      - CSS:
+         - [jquery-orderable.min.css](https://cdn.rawgit.com/iuliuvisovan/jquery-orderable/master/jquery.orderable.min.css)
+         - [jquery.orderable.css](https://cdn.rawgit.com/iuliuvisovan/jquery-orderable/master/jquery.orderable.css)
+         
+      - Reference ```<script src="scripts/jquery.orderable.min.js"></script>```
+      - Reference ```<link rel="stylesheet" href="css/jquery.orderable.min.css"></link> ```
+      
 ## Usage
 
-TODO: Write usage instructions
+`$('#myTable').orderable()`
 
-## Contributing
+## Configuration
+Supply a params object:
 
-1. Fork it!
-2. Create your feature branch: `git checkout -b my-new-feature`
-3. Commit your changes: `git commit -am 'Add some feature'`
-4. Push to the branch: `git push origin my-new-feature`
-5. Submit a pull request :D
+Example: `$('#myTable').orderable({ flagName: 'flagName' })`
 
-## History
+Available parameters:
 
-TODO: Write history
+  - `tbodyAsUnit`: Set to true if you want to move whole row-groups (`<tbody>` elements)
+  
+      - `false` *(default)* - The order units are the `<tr>` elements inside the target table
+      - `true` - The order units are the `<tbody>` elements inside the target table
+      
+Add classes to rows:
 
-## Credits
+  Available classes:
+  
+  - `.orderable-exclude`: Add this class to a row or row group to exclude it from reordering  
+    
 
-TODO: Write credits
+## Behaviour
 
-## License
+Events are dispatched at key moments of the reordering process. Use these to add custom behaviour.
 
-TODO: Write license
+Example:
+
+```
+  document.addEventListener('jquery.orderable.load', function () {
+      console.log("jQuery Orderable loaded successfully!");
+  }, false);
+```
+
+Available events:
+
+ - `jquery.orderable.load`: Dispatched when the plugin has sucessfully loaded (make sure to add event listener before applying the plugin)
+ - `jquery.orderable.init`: Dispatched when targeted table was found & was sucessfully prepared for reordering
+ - `jquery.orderable.order.start`: Dispatched when the left mouse button was clicked on a reorderable row
+ - `jquery.orderable.order.cancel`: Dispatched when the picked row was dropped in an invalid location
+ - `jquery.orderable.order.finish`: Dispatched when the target row got successfully moved (even if onto its initial position) 
+
+
+## Contact
+
+Iuliu Vișovan / www.iuliu.net / iuliuvisovan@gmail.com
