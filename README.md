@@ -35,12 +35,12 @@ Add `.js` and `.css` files into your project:
       
 ## Usage
 
-`$('#myTable').orderable()`
+`$('#myTable').orderable();`
 
 ## Configuration
 Supply a params object:
 
-Example: `$('#myTable').orderable({ flagName: 'flagName' })`
+Example: `$('#myTable').orderable({ flagName: 'flagName' });`
 
 Available parameters:
 
