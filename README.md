@@ -21,7 +21,7 @@ Add `.js` and `.css` files into your project:
 
 
 
- - *Download & reference locally*
+ - *Download & reference locally (Right click -> Save As..)*
       - JS:
          - [jquery-orderable.min.js](https://cdn.rawgit.com/iuliuvisovan/jquery-orderable/master/jquery.orderable.min.js)
          - [jquery.orderable.js](https://cdn.rawgit.com/iuliuvisovan/jquery-orderable/master/jquery.orderable.js)
