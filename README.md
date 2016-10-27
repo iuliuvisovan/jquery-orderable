@@ -53,7 +53,7 @@ Add `.js` and `.css` files into your project:
 
      Available classes:
 
-  - `.orderable-exclude`: Add this class to a row or row group to exclude it from reordering  
+  - `.orderable-exclude`: Add this class to a row, row group or table data to exclude the element from being pullable for reordering  
     
 
 ## Behaviour
