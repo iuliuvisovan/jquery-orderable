@@ -1,6 +1,6 @@
 # jQuery Orderable
 
-**jQuery Orderable** is a small jQuery plugin that allows you to reorder rows or row groups inside a table with drag'n'drop. 
+**jQuery Orderable** is a jQuery plugin that allows reording of elements inside an HTML `<table>` via drag'n'drop.
 
 ## Demo
 
