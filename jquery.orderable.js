@@ -15,12 +15,20 @@ if (typeof jQuery === 'undefined') {
   window.CustomEvent = CustomEvent;
 })();
 
+function isTouchDevice() { return 'ontouchstart' in window || navigator.maxTouchPoints; };
+
 +function ($) {
   $.fn.orderable = function (opts) {
     var self = this;
     opts = opts || {};
     var options = {
-      unit: opts.tbodyAsUnit ? 'tbody' : 'tbody tr'
+      unit: opts.useTbodyAsUnit ? 'tbody' : 'tbody tr',
+      useHandlerOnTouch: opts.useHandlerOnTouch || false,
+      onLoad: opts.onLoad,
+      onInit: opts.onInit,
+      onOrderStart: opts.onOrderStart,
+      onOrderCancel: opts.onOrderCancel,
+      onOrderFinish: opts.onOrderFinish
     }
 
     $draggedUnit = {}; //Reference to the currently dragged/pulled table row
@@ -47,6 +55,7 @@ if (typeof jQuery === 'undefined') {
       ORDERING_FINISHED: 'jquery.orderable.order.finish'
     }
 
+    invokeParameter("onLoad");
     document.dispatchEvent(new CustomEvent(EVENTS.LOADED));
 
     init(this, options);
@@ -75,8 +84,9 @@ if (typeof jQuery === 'undefined') {
       }, '.jq-orderable.reordering ' + options.unit);
 
       $(document).on('touchmove mousemove', function (event) {
-        if (event.changedTouches) {
-          mouseY = event.changedTouches[event.changedTouches.length - 1].pageY;
+        if (event.changedTouches || event.originalEvent.changedTouches) {
+          event.changedTouches && (mouseY = event.changedTouches[event.changedTouches.length - 1].pageY);
+          event.originalEvent.changedTouches && (mouseY = event.originalEvent.changedTouches[event.originalEvent.changedTouches.length - 1].pageY);
         } else {
           mouseY = event.pageY;
         }
@@ -84,12 +94,18 @@ if (typeof jQuery === 'undefined') {
           return;
         calculateHoveredUnits();
       });
-
+      invokeParameter("onInit");
       document.dispatchEvent(new CustomEvent(EVENTS.initiated));
     }
 
     function mouseDown(event) {
-      if ($($(event.target).closest('td')).is('.jq-orderable ' + options.unit + ':not(.orderable-exclude) td:not(.orderable-exclude)')) {
+      if (isTouchDevice() && options.useHandlerOnTouch === true) {
+        !$(".touch-move-row").length && console.error('jQuery Orderable: \'useHandlerOnTouch\' is set to true but no drag handlers were found! Use the \'.touch-move-row\' class to mark an element as a handler.');
+        var clickHandler = '.jq-orderable ' + options.unit + ':not(.orderable-exclude) td:not(.orderable-exclude) .touch-move-row';
+      }
+      else
+        var clickHandler = '.jq-orderable ' + options.unit + ':not(.orderable-exclude) td:not(.orderable-exclude)';
+      if ($($(event.target).closest(isTouchDevice() ? '.touch-move-row' : 'td')).is(clickHandler)) {
         $draggedUnit = $(event.target).parents(options.unit)[0];
         addGhostElement();
         $($draggedUnit).parents('table').addClass(STATE.REORDERING);  //Set table's style
@@ -102,6 +118,7 @@ if (typeof jQuery === 'undefined') {
         $($draggedUnit).addClass(STATE.MOVING);   //Row becomes fixed, 'movable'  and can start moving
         $($draggedUnit).find('tr:visible').addClass('orderable-row-as-table');
         calculateHoveredUnits();
+        invokeParameter("onOrderStart");
         document.dispatchEvent(new CustomEvent(EVENTS.ORDERING_STARTED));
       }
     };
@@ -127,6 +144,7 @@ if (typeof jQuery === 'undefined') {
 
         if (!isValidUnit(unitAfter)) {
           resetTable();
+          invokeParameter("onOrderCancel");
           document.dispatchEvent(new CustomEvent(EVENTS.ORDERING_CANCELLED));
           return;
         }
@@ -142,10 +160,13 @@ if (typeof jQuery === 'undefined') {
         $($draggedUnit).insertAfter(unitBefore);
       }
       $($draggedUnit).addClass('added');
+      //Wait for animation end
       setTimeout(function () {
         $($draggedUnit).removeClass('added');
       }, 1000);
       resetTable();
+
+      invokeParameter("onOrderFinish");
       document.dispatchEvent(new CustomEvent(EVENTS.ORDERING_FINISHED, {
         detail: $draggedUnit
       }));
@@ -188,6 +209,16 @@ if (typeof jQuery === 'undefined') {
         top: mouseY - 15,
       });
     }
+
+    function invokeParameter(parameterName) {
+      if (options[parameterName]) {
+        if (options[parameterName].constructor !== Function)
+          console.error("jQuery Orderable: Supplied value for '" + parameterName + "' is not a function.");
+        else
+          options[parameterName]($draggedUnit || undefined);
+      }
+    }
+
     return this;
   };
 }(jQuery);
