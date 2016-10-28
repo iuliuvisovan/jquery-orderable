@@ -49,12 +49,31 @@ Add `.js` and `.css` files into your project:
       - `false` *(default)* - The order units are the `<tr>` elements inside the target table
       - `true` - The order units are the `<tbody>` elements inside the target table
       
+  - `useHandlerOnTouch`: Set to true if you want to use specific drag handlers to move a row when on touch devices.
+
+      - `false` *(default)* - The entire row/row-group is draggable
+      - `true` - Only elements decorated with the `touch-move-row` class will act as drag handlers when on a touch device. (It is your responsibility to place and mark these handlers.)
+   
+   - `onLoad`, `onInit`, `onOrderStart`, `onOrderCancel`, `onOrderFinish`: Supply functions to these parameters if you want to handle behaviour at specific points of the plugin's activity. These are fired together with their respective events, see *behaviour/events* below.
+
  - By adding state classes to markup:
 
      Available classes:
 
   - `.orderable-exclude`: Add this class to a row, row group or table data to exclude the element from being pullable for reordering  
+  - `.touch-move-row`: Add this class to any element if you want it to act as its containing row's handler when on a touch device
     
+Example with full parameters:
+
+        $('.scrollable-table-body table').orderable({
+          useTbodyAsUnit: true,
+          useHandlerOnTouch: true,
+          onLoad: function () { console.info('I loaded!') },
+          onInit: function () { console.info('I did all my thingies!') },
+          onOrderStart: function (element) { console.info('I\'m reordering! Selected unit: ', element) },
+          onOrderCancel: function (element) { console.info('I\'m not reordering anymore, I got cancelled! Selected unit: ', element) },
+          onOrderFinish: function (element) { console.info('I\'ve finished reordering! Selected unit: ', element) }
+        });
 
 ## Behaviour
 
@@ -63,8 +82,8 @@ Events are dispatched at key moments of the reordering process. Add handlers to 
 Example:
 
 ```
-  document.addEventListener('jquery.orderable.load', function () {
-      console.log("jQuery Orderable loaded successfully!");
+  document.addEventListener('jquery.orderable.order.start', function (changedElement) {
+      console.log("I\'m reordering! Selected unit: ", changedElement);
   }, false);
 ```
 
