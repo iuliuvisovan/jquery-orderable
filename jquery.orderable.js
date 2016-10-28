@@ -92,6 +92,7 @@ function isTouchDevice() { return 'ontouchstart' in window || navigator.maxTouch
         }
         if (!$('.moving')[0])
           return;
+        event.preventDefault();
         calculateHoveredUnits();
       });
       invokeParameter("onInit");
