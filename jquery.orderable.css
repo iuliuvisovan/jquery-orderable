@@ -82,6 +82,7 @@
     .jq-orderable .added {
         animation-name: added;
         animation-duration: 1s;
+        animation-delay: 0s;
     }
 
         .jq-orderable .added td {
@@ -91,7 +92,7 @@
 
 @keyframes added {
     from {
-        opacity: 0.4;
+        opacity: 0.6;
     }
 
     to {
