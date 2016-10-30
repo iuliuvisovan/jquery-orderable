@@ -40,7 +40,7 @@ Add `.js` and `.css` files into your project:
 
     Available parameters:
 
-  - `tbodyAsUnit`: Set to true if you want to move whole row-groups (`<tbody>` elements)
+  - `useTbodyAsUnit`: Set to true if you want to move whole row-groups (`<tbody>` elements)
 
       - `false` *(default)* - The order units are the `<tr>` elements inside the target table
       - `true` - The order units are the `<tbody>` elements inside the target table
