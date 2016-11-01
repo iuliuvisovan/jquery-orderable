@@ -13,8 +13,8 @@ Add `.js` and `.css` files into your project:
 - *Via CDN*
 
 ``` 
-    <script src="https://cdn.rawgit.com/iuliuvisovan/jquery-orderable/master/jquery.orderable.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.rawgit.com/iuliuvisovan/jquery-orderable/master/jquery.orderable.min.css"></link>    
+    <script src="https://cdn.rawgit.com/iuliuvisovan/jquery-orderable/master/js/jquery.orderable.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.rawgit.com/iuliuvisovan/jquery-orderable/master/css/jquery.orderable.min.css"></link>    
 ```
 
 
@@ -22,9 +22,9 @@ Add `.js` and `.css` files into your project:
 
 
  - *Download & reference locally (Right click -> Save As..)*
-      - JS: [jquery-orderable.min.js](https://cdn.rawgit.com/iuliuvisovan/jquery-orderable/master/jquery.orderable.min.js) /  [jquery.orderable.js](https://cdn.rawgit.com/iuliuvisovan/jquery-orderable/master/jquery.orderable.js)
+      - JS: [jquery-orderable.min.js](https://cdn.rawgit.com/iuliuvisovan/jquery-orderable/master/js/jquery.orderable.min.js) /  [jquery.orderable.js](https://cdn.rawgit.com/iuliuvisovan/jquery-orderable/master/js/jquery.orderable.js)
 
-      - CSS: [jquery-orderable.min.css](https://cdn.rawgit.com/iuliuvisovan/jquery-orderable/master/jquery.orderable.min.css) / [jquery.orderable.css](https://cdn.rawgit.com/iuliuvisovan/jquery-orderable/master/jquery.orderable.css)
+      - CSS: [jquery-orderable.min.css](https://cdn.rawgit.com/iuliuvisovan/jquery-orderable/master/css/jquery.orderable.min.css) / [jquery.orderable.css](https://cdn.rawgit.com/iuliuvisovan/jquery-orderable/master/css/jquery.orderable.css)
          
       - Reference ```<script src="scripts/jquery.orderable.min.js"></script>```
       - Reference ```<link rel="stylesheet" href="css/jquery.orderable.min.css"></link> ```
