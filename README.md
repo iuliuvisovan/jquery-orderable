@@ -4,7 +4,7 @@
 
 ## Demo
 
-Soon
+http://www.iuliu.net/jquery.orderable/
 
 ## Installation
 
