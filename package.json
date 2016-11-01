@@ -1,0 +1,27 @@
+{
+  "name": "jquery-orderable",
+  "version": "1.0.0",
+  "description": "whatevs",
+  "main": "jquery.orderable.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iuliuvisovan/jquery-orderable.git"
+  },
+  "author": "Iuliu Visovan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iuliuvisovan/jquery-orderable/issues"
+  },
+  "homepage": "https://github.com/iuliuvisovan/jquery-orderable#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^2.0.13",
+    "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^2.2.0",
+    "gulp-uglify": "^2.0.0",
+    "pump": "^1.0.1"
+  }
+}

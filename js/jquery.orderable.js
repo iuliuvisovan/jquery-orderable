@@ -101,12 +101,12 @@ function isTouchDevice() { return 'ontouchstart' in window || navigator.maxTouch
 
     function mouseDown(event) {
       if (isTouchDevice() && options.useHandlerOnTouch === true) {
-        !$(".touch-move-row").length && console.error('jQuery Orderable: \'useHandlerOnTouch\' is set to true but no drag handlers were found! Use the \'.touch-move-row\' class to mark an element as a handler.');
         var clickHandler = '.jq-orderable ' + options.unit + ':not(.orderable-exclude) td:not(.orderable-exclude) .touch-move-row';
       }
       else
         var clickHandler = '.jq-orderable ' + options.unit + ':not(.orderable-exclude) td:not(.orderable-exclude)';
-      if ($($(event.target).closest(isTouchDevice() ? '.touch-move-row' : 'td')).is(clickHandler)) {
+      if ($($(event.target).closest(isTouchDevice() && options.useHandlerOnTouch === true ? '.touch-move-row' : 'td')).is(clickHandler)) {
+        !$(".touch-move-row").length && console.error('jQuery Orderable: \'useHandlerOnTouch\' is set to true but no drag handlers were found! Use the \'.touch-move-row\' class to mark an element as a handler.');
         $draggedUnit = $(event.target).parents(options.unit)[0];
         addGhostElement();
         $($draggedUnit).parents('table').addClass(STATE.REORDERING);  //Set table's style
@@ -207,7 +207,7 @@ function isTouchDevice() { return 'ontouchstart' in window || navigator.maxTouch
       $('.hovered').removeClass('hovered');
       $(unitBefore).addClass('hovered');
       $('.moving').css({
-        top: mouseY - 15,
+        top: mouseY - 15
       });
     }
 
