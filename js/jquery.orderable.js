@@ -106,7 +106,7 @@ function isTouchDevice() { return 'ontouchstart' in window || navigator.maxTouch
       else
         var clickHandler = '.jq-orderable ' + options.unit + ':not(.orderable-exclude) td:not(.orderable-exclude)';
       if ($($(event.target).closest(isTouchDevice() && options.useHandlerOnTouch === true ? '.touch-move-row' : 'td')).is(clickHandler)) {
-        !$(".touch-move-row").length && console.error('jQuery Orderable: \'useHandlerOnTouch\' is set to true but no drag handlers were found! Use the \'.touch-move-row\' class to mark an element as a handler.');
+        !$(".touch-move-row").length && options.useHandlerOnTouch === true && console.error('jQuery Orderable: \'useHandlerOnTouch\' is set to true but no drag handlers were found! Use the \'.touch-move-row\' class to mark an element as a handler.');
         $draggedUnit = $(event.target).parents(options.unit)[0];
         addGhostElement();
         $($draggedUnit).parents('table').addClass(STATE.REORDERING);  //Set table's style
