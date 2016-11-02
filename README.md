@@ -52,7 +52,7 @@ Add `.js` and `.css` files into your project:
       - `false` *(default)* - The entire row/row-group is draggable
       - `true` - Only elements decorated with the `touch-move-row` class will act as drag handlers when on a touch device. (It is your responsibility to place and mark these handlers.)
    
-   - `onLoad`, `onInit`, `onOrderStart`, `onOrderCancel`, `onOrderFinish`: Supply functions to these parameters if you want to handle behaviour at specific points of the plugin's activity. These are fired together with their respective events, see *behaviour/events* below.
+   - `onLoad`, `onInit`, `onOrderStart`, `onOrderCancel`, `onOrderFinish`, `onOrderReorder`: Supply functions to these parameters if you want to handle behaviour at specific points of the plugin's activity. These are fired together with their respective events, see *behaviour/events* below.
 
  - By adding state classes to markup:
 
@@ -70,7 +70,9 @@ Example with full parameters:
           onInit: function () { console.info('I did all my thingies!') },
           onOrderStart: function (element) { console.info('I\'m reordering! Selected unit: ', element) },
           onOrderCancel: function (element) { console.info('I\'m not reordering anymore, I got cancelled! Selected unit: ', element) },
-          onOrderFinish: function (element) { console.info('I\'ve finished reordering! Selected unit: ', element) }
+          onOrderFinish: function (element) { console.info('I\'ve finished reordering! Selected unit: ', element) },
+          onOrderReorder: function (element) { console.info('I\'ve finished reordering and I definitely changed order! Changed unit: ', element) },
+          
         });
 
 ## Behaviour
@@ -92,6 +94,7 @@ Available events:
  - `jquery.orderable.order.start`: Dispatched when the left mouse button was clicked on a reorderable row
  - `jquery.orderable.order.cancel`: Dispatched when the picked row was dropped in an invalid location
  - `jquery.orderable.order.finish`: Dispatched when the target row got successfully moved (even if onto its initial position) 
+ - `jquery.orderable.order.finish.reorder': Dispatched when the target row sucessfully moved (but only if end position different than start position)
 
 
 ## Contact
