@@ -6,6 +6,8 @@
 
 http://www.iuliu.net/jquery.orderable/
 
+<img src="https://github.com/iuliuvisovan/jquery-orderable/blob/master/demo.gif" width="50%">
+
 ## Installation
 
 Add `.js` and `.css` files into your project:
