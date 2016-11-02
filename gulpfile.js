@@ -34,4 +34,4 @@
 		gulp.watch(['/css/*.css', '!/css/*.min.css'], ['minify-css']);
 	})
 
-	gulp.task('default', ['minify-css', 'compress', 'watch']);
+	gulp.task('default', ['minify-css', 'compress']);
