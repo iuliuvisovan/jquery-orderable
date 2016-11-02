@@ -94,7 +94,7 @@ Available events:
  - `jquery.orderable.order.start`: Dispatched when the left mouse button was clicked on a reorderable row
  - `jquery.orderable.order.cancel`: Dispatched when the picked row was dropped in an invalid location
  - `jquery.orderable.order.finish`: Dispatched when the target row got successfully moved (even if onto its initial position) 
- - `jquery.orderable.order.finish.reorder': Dispatched when the target row sucessfully moved (but only if end position different than start position)
+ - `jquery.orderable.order.finish.reorder`: Dispatched when the target row sucessfully moved (but only if end position different than start position)
 
 
 ## Contact
