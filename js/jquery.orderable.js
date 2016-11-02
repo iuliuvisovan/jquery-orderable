@@ -28,12 +28,14 @@ function isTouchDevice() { return 'ontouchstart' in window || navigator.maxTouch
       onInit: opts.onInit,
       onOrderStart: opts.onOrderStart,
       onOrderCancel: opts.onOrderCancel,
-      onOrderFinish: opts.onOrderFinish
+      onOrderFinish: opts.onOrderFinish,
+      onOrderReorder: opts.onOrderReorder
     }
 
     $draggedUnit = {}; //Reference to the currently dragged/pulled table row
     var $ghost; //Reference to the ghost element at the top that makes moving to top easier
     var mouseY;     //The position on the Y axis of the mouse
+    var hasDomChanged = false;     //The position on the Y axis of the mouse
 
     var EVENT = {
       MOUSEDOWN: 'mousedown touchstart',
@@ -52,7 +54,8 @@ function isTouchDevice() { return 'ontouchstart' in window || navigator.maxTouch
       INITIATED: 'jquery.orderable.init',
       ORDERING_STARTED: 'jquery.orderable.order.start',
       ORDERING_CANCELLED: 'jquery.orderable.order.cancel',
-      ORDERING_FINISHED: 'jquery.orderable.order.finish'
+      ORDERING_FINISHED: 'jquery.orderable.order.finish',
+      ORDERING_REORDERED: 'jquery.orderable.order.finish.reorder'
     }
 
     invokeParameter("onLoad");
@@ -73,7 +76,7 @@ function isTouchDevice() { return 'ontouchstart' in window || navigator.maxTouch
       }
 
       $(currentElement).addClass(STATE.ORDERABLE)
-                       .attr('ondragstart', 'return false;'); //Prevents the browser from pulling elements 
+        .attr('ondragstart', 'return false;'); //Prevents the browser from pulling elements 
       $(currentElement).find(options.unit).addClass(STATE.ORDERABLE_UNIT);
 
       $(document).on({
@@ -96,7 +99,7 @@ function isTouchDevice() { return 'ontouchstart' in window || navigator.maxTouch
         calculateHoveredUnits();
       });
       invokeParameter("onInit");
-      document.dispatchEvent(new CustomEvent(EVENTS.initiated));
+      document.dispatchEvent(new CustomEvent(EVENTS.INITIATED));
     }
 
     function mouseDown(event) {
@@ -151,6 +154,8 @@ function isTouchDevice() { return 'ontouchstart' in window || navigator.maxTouch
         }
       }
 
+      var previousSibling = $($draggedUnit).prev(options.unit)[0];
+
       if (unitAfter) {
         if ($(unitAfter).is('.orderable-ghost')) {
           $($draggedUnit).insertAfter(unitAfter);
@@ -165,6 +170,14 @@ function isTouchDevice() { return 'ontouchstart' in window || navigator.maxTouch
       setTimeout(function () {
         $($draggedUnit).removeClass('added');
       }, 1000);
+
+      if ($($draggedUnit).prev(options.unit)[0] !== previousSibling) {
+        invokeParameter("onOrderReorder");
+        document.dispatchEvent(new CustomEvent(EVENTS.ORDERING_REORDERED, {
+          detail: $draggedUnit
+        }));
+      }
+
       resetTable();
 
       invokeParameter("onOrderFinish");
@@ -222,4 +235,4 @@ function isTouchDevice() { return 'ontouchstart' in window || navigator.maxTouch
 
     return this;
   };
-}(jQuery);
+} (jQuery);
