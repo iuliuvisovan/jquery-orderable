@@ -111,8 +111,8 @@ function isTouchDevice() { return 'ontouchstart' in window || navigator.maxTouch
       if ($($(event.target).closest(isTouchDevice() && options.useHandlerOnTouch === true ? '.touch-move-row' : 'td')).is(clickHandler)) {
         !$(".touch-move-row").length && options.useHandlerOnTouch === true && console.error('jQuery Orderable: \'useHandlerOnTouch\' is set to true but no drag handlers were found! Use the \'.touch-move-row\' class to mark an element as a handler.');
         $draggedUnit = $(event.target).parents(options.unit)[0];
-        addGhostElement();
         $($draggedUnit).parents('table').addClass(STATE.REORDERING);  //Set table's style
+        addGhostElement();
         $($draggedUnit).css({
           //Set its position equal to its current position, so it's ready for 'fixed'
           top: $draggedUnit.getBoundingClientRect().top,
@@ -128,7 +128,7 @@ function isTouchDevice() { return 'ontouchstart' in window || navigator.maxTouch
     };
 
     function addGhostElement() {
-      var $firstUnitInTable = $(options.unit, self).first();
+      var $firstUnitInTable = $(options.unit + ":visible:not(:empty)", self).first();
       $ghost = $($firstUnitInTable).clone();
       $ghost.find('td').empty();
       $ghost.addClass('orderable-ghost').css('display', '').css('background', '').insertBefore($firstUnitInTable);
@@ -154,7 +154,7 @@ function isTouchDevice() { return 'ontouchstart' in window || navigator.maxTouch
         }
       }
 
-      var previousSibling = $($draggedUnit).prev(options.unit)[0];
+      var previousSibling = $($draggedUnit).prevAll(options.unit + ":visible")[0];
 
       if (unitAfter) {
         if ($(unitAfter).is('.orderable-ghost')) {
@@ -171,7 +171,7 @@ function isTouchDevice() { return 'ontouchstart' in window || navigator.maxTouch
         $($draggedUnit).removeClass('added');
       }, 1000);
 
-      if ($($draggedUnit).prev(options.unit)[0] !== previousSibling) {
+      if ($($draggedUnit).prevAll(options.unit + ":visible")[0] !== previousSibling) {
         invokeParameter("onOrderReorder");
         document.dispatchEvent(new CustomEvent(EVENTS.ORDERING_REORDERED, {
           detail: $draggedUnit
@@ -235,4 +235,4 @@ function isTouchDevice() { return 'ontouchstart' in window || navigator.maxTouch
 
     return this;
   };
-} (jQuery);
+}(jQuery);
