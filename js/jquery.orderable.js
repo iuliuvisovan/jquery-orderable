@@ -35,7 +35,6 @@ function isTouchDevice() { return 'ontouchstart' in window || navigator.maxTouch
     $draggedUnit = {}; //Reference to the currently dragged/pulled table row
     var $ghost; //Reference to the ghost element at the top that makes moving to top easier
     var mouseY;     //The position on the Y axis of the mouse
-    var hasDomChanged = false;     //The position on the Y axis of the mouse
 
     var EVENT = {
       MOUSEDOWN: 'mousedown touchstart',
@@ -154,7 +153,7 @@ function isTouchDevice() { return 'ontouchstart' in window || navigator.maxTouch
         }
       }
 
-      var previousSibling = $($draggedUnit).prevAll(options.unit + ":visible")[0];
+      var previousSibling = $($draggedUnit).prevAll(options.unit + ":not(.orderable-ghost):visible")[0];
 
       if (unitAfter) {
         if ($(unitAfter).is('.orderable-ghost')) {
@@ -171,14 +170,14 @@ function isTouchDevice() { return 'ontouchstart' in window || navigator.maxTouch
         $($draggedUnit).removeClass('added');
       }, 1000);
 
-      if ($($draggedUnit).prevAll(options.unit + ":visible")[0] !== previousSibling) {
+      resetTable();
+
+      if ($($draggedUnit).prevAll(options.unit + ":not(.orderable-ghost):visible")[0] !== previousSibling) {
         invokeParameter("onOrderReorder");
         document.dispatchEvent(new CustomEvent(EVENTS.ORDERING_REORDERED, {
           detail: $draggedUnit
         }));
       }
-
-      resetTable();
 
       invokeParameter("onOrderFinish");
       document.dispatchEvent(new CustomEvent(EVENTS.ORDERING_FINISHED, {
