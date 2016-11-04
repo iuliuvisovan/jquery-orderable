@@ -1,0 +1,107 @@
+.jq-orderable {
+    border-collapse: collapse;
+}
+
+    .jq-orderable .jq-orderable-unit:not(.orderable-exclude) td:not(.orderable-exclude) {
+        cursor: move;
+    } 
+    .jq-orderable .jq-orderable-unit:not(.orderable-exclude) {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    .jq-orderable .jq-orderable-unit.moving {
+        position: fixed;
+        z-index: 2;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+        border: 1px solid white !important;
+        opacity: 1 !important;
+        pointer-events: none;
+    }
+
+        .jq-orderable .jq-orderable-unit.moving .orderable-row-as-table {
+            display: table;
+            width: 100%;
+        }
+
+
+    .jq-orderable .orderable-ghost {
+        height: 0;
+        opacity: 0 !important;
+        display: none;
+    }
+
+        .jq-orderable .orderable-ghost td {
+            padding: 0;
+            border: none;
+        }
+
+        .jq-orderable .orderable-ghost tr {
+            display: none !important;
+        }
+
+            .jq-orderable .orderable-ghost tr:first-child {
+                display: table-row !important;
+            }
+
+            .jq-orderable .orderable-ghost tr td {
+                height: 20px;
+                padding: 20px !important;
+            }
+
+    .jq-orderable.reordering tr.orderable-ghost {
+        display: table-row;
+    }
+
+    .jq-orderable.reordering tbody.orderable-ghost {
+        display: table-row-group;
+    }
+
+    .jq-orderable.reordering .jq-orderable-unit:not(.orderable-exclude) {
+        opacity: 0.7;
+    }
+
+    .jq-orderable.reordering .jq-orderable-unit.hovered:after {
+        content: '';
+        display: none;
+        height: 0;
+    }
+
+    .jq-orderable.reordering .jq-orderable-unit.hovered:after {
+        content: '';
+        display: block;
+        height: 55px;
+    }
+
+    .jq-orderable.reordering .jq-orderable-unit.hovered + .jq-orderable-unit {
+        border-top: 40px solid #fff;
+    }
+
+    .jq-orderable .added {
+        animation-name: added;
+        animation-duration: 1s;
+        animation-delay: 0s;
+    }
+
+        .jq-orderable .added td {
+            animation-name: td-added;
+            animation-duration: 0.2s;
+        }
+
+@keyframes added {
+    from {
+        opacity: 0.6;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes td-added {
+    from {
+        padding: 0 20px;
+    }
+}
