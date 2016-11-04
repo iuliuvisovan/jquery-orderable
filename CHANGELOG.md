@@ -8,4 +8,4 @@ All notable changes to this plugin will be documented in this file.
 
 
 ### Changed
-- *nothing*
+- Misc bugfixes and environment agnostic improvements
